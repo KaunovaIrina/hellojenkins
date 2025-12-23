@@ -8,7 +8,8 @@ class TestApp(unittest.TestCase):
     def test_hello_route(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Привет', response.data)
+        # Ключевое исправление: декодируем байты в строку
+        self.assertIn('Привет', response.data.decode())
 
 if __name__ == '__main__':
     unittest.main()
