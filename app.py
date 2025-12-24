@@ -1,15 +1,13 @@
+from flask import Flask, render_template
 import os
-from flask import Flask
 
 app = Flask(__name__)
 
-# Получаем имя студента и порт из переменных окружения
-student_name = os.getenv('STUDENT_NAME', 'Студент')
-port = int(os.getenv('PORT', 5000))
-
 @app.route('/')
 def hello():
-    return f'<h1>Меня зовут {student_name}!</h1><p>Порт: {port}</p>'
+    student_name = os.getenv('STUDENT_NAME', 'Девопсов Олег')
+    return render_template('index.html', student_name=student_name)
 
 if __name__ == '__main__':
+    port = int(os.getenv('PORT', 8081))
     app.run(host='0.0.0.0', port=port)
